@@ -1,5 +1,3 @@
-const { INTEGER } = require('sequelize')
-const Sequelize = require('sequelize')
 const Model = require('../model/Bike')
 
 module.exports = {
@@ -45,7 +43,7 @@ module.exports = {
             })
             
             if(!data[1])
-                return res.status(400).json("Já possui informação correspondente cadastrada")            
+                return res.status(400).json("Já possui informação correspondente cadastrada")
             
             return res.status(200).json(data)
         }catch(error){
