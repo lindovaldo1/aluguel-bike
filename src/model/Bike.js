@@ -6,7 +6,7 @@ class Bike extends Model {
             model: DataTypes.STRING,
             color: DataTypes.STRING,
             fabrication_year: DataTypes.DATE,
-            Wheels: DataTypes.INTEGER,
+            wheels: DataTypes.INTEGER,
             state: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true
