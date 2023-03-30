@@ -1,13 +1,16 @@
-const User = require('../model/User')
+const Model = require('../model/User')
 
 module.exports = {
     async getAll(req, res){
         try {
-            const user = await User.findAll({
+            const data = await Model.findAll({
                 where: { state: true }
             })
     
-            return res.status(200).json(user)
+            if(data.length == 0)
+                return res.status(400).json("Nenhuma informação encontrada")
+
+            return res.status(200).json(data)
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -15,14 +18,14 @@ module.exports = {
     async getById(req, res){
         try { 
             const { id } = req.params
-            const user = await User.findOne({
+            const data = await Model.findOne({
                 where: { id: Number(id), state: true }
             })
             
-            if(user === null)
-                return res.status(200).json("Nenhum usuário correspondente encontrado")
+            if(data === null)
+                return res.status(200).json("Nenhuma informação correspondente encontrada")
 
-            return res.status(200).json(user)
+            return res.status(200).json(data)
         } catch (error) {
             return res.status(500).json(error.message)
         }
@@ -31,15 +34,15 @@ module.exports = {
         try{
             const { name, email, password, date_birth } = req.body
 
-            const user = await User.findOrCreate({
+            const data = await Model.findOrCreate({
                 where: { name, email },
                 defaults:{ name, email, password, date_birth, state: true }
             })
             
-            if(!user[1])
-                return res.status(400).json("Usuário já possui cadastro")            
+            if(!data[1])
+                return res.status(400).json("Já possui informação correspondente cadastrada")
             
-            return res.status(200).json(user)
+            return res.status(200).json(data)
         }catch(error){
             return res.status(500).json(error.message)
         }        
@@ -48,18 +51,18 @@ module.exports = {
         try{
             const { id } = req.params
             const { name, email, password, date_birth, state } = req.body
-            let user = await User.findOne({
+            let data = await Model.findOne({
                 where: { id: Number(id) }
             })
             
-            if(user === null)
-                return res.status(400).json("Usuário não encontrado")
+            if(data === null)
+                return res.status(400).json("Informação não encontrada")
 
-            await User.update({ name, email, password, date_birth, state }, { where: { id: Number(id) } })
+            await Model.update({ name, email, password, date_birth, state }, { where: { id: Number(id) } })
 
-            user = await User.findOne({  where: { id: Number(id) } })
+            data = await Model.findOne({  where: { id: Number(id) } })
 
-            return res.status(200).json( user )
+            return res.status(200).json( data )
         }catch(error){
             return res.status(500).json(error.message)
         }        
@@ -67,16 +70,16 @@ module.exports = {
     async delete(req, res){
         try{
             const { id } = req.params
-            let user = await User.findOne({
+            let data = await Model.findOne({
                 where: { id: Number(id), state: true}
             })
             
-            if(user === null)
-                return res.status(400).json("Usuário não encontrado")
+            if(data === null)
+                return res.status(400).json("Informação não encontrada")
 
-            await User.update({ state: false }, { where: { id: Number(id), state: true } })
+            await Model.update({ state: false }, { where: { id: Number(id), state: true } })
 
-            user = await User.findOne({  where: { id: Number(id) } })
+            data = await Model.findOne({  where: { id: Number(id) } })
 
             return res.status(200).json("Deletado com sucesso!")
         }catch(error){
