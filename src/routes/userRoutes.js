@@ -1,14 +1,14 @@
 const { Router } = require('express')
-const userController = require('../controller/userController')
+const controller = require('../controller/userController')
 
-const userRoutes = Router()
+const routes = Router()
 const uri = '/users'
 
-userRoutes
-   .get(`${uri}/`, userController.getAll)
-   .get(`${uri}/:id`,userController.getById)
-   .post(`${uri}/`, userController.create)
-   .put(`${uri}/:id`,userController.update)
-   .delete(`${uri}/:id`,userController.delete)
+routes
+   .get(`${uri}/`, controller.getAll)
+   .get(`${uri}/:id`,controller.getById)
+   .post(`${uri}/`, controller.create)
+   .put(`${uri}/:id`,controller.update)
+   .delete(`${uri}/:id`,controller.delete)
 
-module.exports = userRoutes
+module.exports = routes

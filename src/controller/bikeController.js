@@ -1,4 +1,4 @@
-const Model = require('../model/Bike')
+const Model = require('../model/bike')
 
 module.exports = {
     async getAll(req, res){

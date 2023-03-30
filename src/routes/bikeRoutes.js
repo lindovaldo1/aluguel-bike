@@ -1,14 +1,14 @@
 const { Router } = require('express')
-const bikeController = require('../controller/bikeController')
+const controller = require('../controller/bikeController')
 
-const bikeRoutes = Router()
+const routes = Router()
 const uri = '/bikes'
 
-bikeRoutes
-   .get(`${uri}/`, bikeController.getAll)
-   .get(`${uri}/:id`,bikeController.getById)
-   .post(`${uri}/`, bikeController.create)
-   .put(`${uri}/:id`,bikeController.update)
-   .delete(`${uri}/:id`,bikeController.delete)
+routes
+   .get(`${uri}/`, controller.getAll)
+   .get(`${uri}/:id`,controller.getById)
+   .post(`${uri}/`, controller.create)
+   .put(`${uri}/:id`,controller.update)
+   .delete(`${uri}/:id`,controller.delete)
 
-module.exports = bikeRoutes
+module.exports = routes
