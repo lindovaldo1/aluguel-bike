@@ -29,7 +29,8 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      },user_id: {
+      },
+      user_id: {
         type: Sequelize.INTEGER,
         references:{
           model: 'users',

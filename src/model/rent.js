@@ -5,8 +5,8 @@ const Bike = require('./bike')
 class Rent extends Model {
     static init(connection){
         super.init({
-            user_id: DataTypes.INTEGER,
-            bike_id: DataTypes.INTEGER,
+            // user_id: DataTypes.INTEGER,
+            // bike_id: DataTypes.INTEGER,
             exit_time: DataTypes.DATE,
             return_time: DataTypes.DATE,
             state: {
@@ -15,9 +15,9 @@ class Rent extends Model {
             },
         }, {
             sequelize: connection,
-        })
+        })     
         this.belongsTo(User)
-        this.belongsTo(Bike)
+        this.belongsTo(Bike)   
     }
 }
 
