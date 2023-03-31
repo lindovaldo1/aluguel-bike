@@ -1,10 +1,19 @@
 const Model = require('../model/rent')
+const User = require('../model/user')
+const Bike = require('../model/bike')
 
 module.exports = {
     async getAll(req, res){
         try {
             const data = await Model.findAll({
-                where: { state: true }
+                where: { state: true },
+                include: [{
+                    model: User,
+                },
+                {
+                    model: Bike,
+                }
+                ]
             })
             
             if(data.length == 0)
@@ -19,7 +28,14 @@ module.exports = {
         try { 
             const { id } = req.params
             const data = await Model.findOne({
-                where: { id: Number(id), state: true }
+                where: { id: Number(id), state: true },
+                include: [{
+                    model: User,
+                },
+                {
+                    model: Bike,
+                }
+                ]
             })
             
             if(data === null)

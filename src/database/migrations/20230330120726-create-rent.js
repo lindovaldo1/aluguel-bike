@@ -10,23 +10,6 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: 'users',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        allowNull: false,
-      },
-      bike_id: {
-        type: Sequelize.INTEGER,
-        references:{
-          model: 'bikes',
-          key: 'id',
-        },
-        allowNull: false,
-      },
       exit_time: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -45,6 +28,21 @@ module.exports = {
       },
       updated_at: {
         type: Sequelize.DATE,
+        allowNull: false,
+      },user_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'users',
+          key: 'id',
+        },
+        allowNull: false,
+      },
+      bike_id: {
+        type: Sequelize.INTEGER,
+        references:{
+          model: 'bikes',
+          key: 'id',
+        },
         allowNull: false,
       },
     })

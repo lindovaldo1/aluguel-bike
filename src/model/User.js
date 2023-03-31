@@ -12,7 +12,8 @@ class User extends Model {
                 defaultValue: true
             },
         }, {
-            sequelize: connection
+            sequelize: connection,
+            modelName: "users",
         })
     }
 }

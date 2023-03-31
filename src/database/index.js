@@ -11,4 +11,5 @@ User.init(connection)
 Bike.init(connection)
 Rent.init(connection)
 
+
 module.exports = connection
