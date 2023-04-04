@@ -1,4 +1,8 @@
 const Model = require('../model/user')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
+const blacklist = []
 
 module.exports = {
     async getAll(req, res){
@@ -33,14 +37,17 @@ module.exports = {
     async create(req, res){
         try{
             const { name, email, password, birthdate } = req.body
+            let password_crypt = password
+
+            password_crypt = await bcrypt.hashSync(password, 10)
 
             const data = await Model.findOrCreate({
                 where: { name, email },
-                defaults:{ name, email, password, birthdate, state: true }
+                defaults:{ name, email, password_crypt, birthdate, state: true }
             })
             
             if(!data[1])
-                return res.status(400).json("Já possui informação correspondente cadastrada")
+                return res.status(400).json("Já possui informação correspondente cadastrada")            
             
             return res.status(200).json(data)
         }catch(error){
@@ -51,12 +58,19 @@ module.exports = {
         try{
             const { id } = req.params
             const { name, email, password, birthdate, state } = req.body
+            let password_crypt = password
+
             let data = await Model.findOne({
                 where: { id: Number(id) }
             })
             
             if(data === null)
                 return res.status(400).json("Informação não encontrada")
+
+            if(data.password !== password){
+                password_crypt = await bcrypt.hashSync(password, 10)
+                await Model.update({ name, email, password_crypt, birthdate, state }, { where: { id: Number(id) } })
+            }
 
             await Model.update({ name, email, password, birthdate, state }, { where: { id: Number(id) } })
 
