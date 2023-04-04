@@ -6,7 +6,7 @@ class User extends Model {
             name: DataTypes.STRING,
             email: DataTypes.STRING,
             password: DataTypes.STRING,
-            date_birth: DataTypes.STRING,
+            birthdate: DataTypes.STRING,
             state: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true

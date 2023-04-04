@@ -32,11 +32,11 @@ module.exports = {
     },    
     async create(req, res){
         try{
-            const { name, email, password, date_birth } = req.body
+            const { name, email, password, birthdate } = req.body
 
             const data = await Model.findOrCreate({
                 where: { name, email },
-                defaults:{ name, email, password, date_birth, state: true }
+                defaults:{ name, email, password, birthdate, state: true }
             })
             
             if(!data[1])
@@ -50,7 +50,7 @@ module.exports = {
     async update(req, res){
         try{
             const { id } = req.params
-            const { name, email, password, date_birth, state } = req.body
+            const { name, email, password, birthdate, state } = req.body
             let data = await Model.findOne({
                 where: { id: Number(id) }
             })
@@ -58,7 +58,7 @@ module.exports = {
             if(data === null)
                 return res.status(400).json("Informação não encontrada")
 
-            await Model.update({ name, email, password, date_birth, state }, { where: { id: Number(id) } })
+            await Model.update({ name, email, password, birthdate, state }, { where: { id: Number(id) } })
 
             data = await Model.findOne({  where: { id: Number(id) } })
 
