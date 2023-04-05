@@ -34,11 +34,11 @@ module.exports = {
     async getById(req, res){
         try { 
             const { id } = req.params
-            const data = await Model.findOne({
+            const data = await Model.findAll({
                 where: { id: Number(id), state: true }
             })
             
-            if(data === null)
+            if(data.length == 0)
                 return res.status(200).json("Nenhuma informação correspondente encontrada")
 
             return res.status(200).json(data)
@@ -121,6 +121,7 @@ module.exports = {
     async getLogin(req, res) {
         try {
             const { email, password } = req.body;
+            
             const data = await Model.findOne({
                 where: {
                     email: email,
