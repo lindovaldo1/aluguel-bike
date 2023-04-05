@@ -11,6 +11,7 @@ class User extends Model {
                 type: DataTypes.BOOLEAN,
                 defaultValue: true
             },
+            role: DataTypes.STRING,
         }, {
             sequelize: connection,
             modelName: "users",

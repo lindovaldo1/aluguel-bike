@@ -49,14 +49,15 @@ module.exports = {
     async create(req, res){
         try{            
             const { user_id, bike_id, exit_time, return_time, state } = req.body
+            
             // let date =  fabrication_year +'T00:00:00.000Z'
             const data = await Model.findOrCreate({
                 where: {
                     user_id, bike_id, state: true
                 },
-                defaults: { user_id, bike_id, exit_time, return_time, state }
+                defaults: { user_id: user_id, bike_id: bike_id, exit_time: exit_time, return_time: return_time, state: state }
             })
-            
+            console.log(data[1])
             if(!data[1])
                 return res.status(400).json("Já possui informação correspondente cadastrada")
             
