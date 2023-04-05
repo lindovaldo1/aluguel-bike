@@ -1,12 +1,13 @@
 const Model = require('../model/rent')
 const User = require('../model/user')
 const Bike = require('../model/bike')
+const { Op } = require('sequelize')
 
 module.exports = {
     async getAll(req, res){
         try {
             const data = await Model.findAll({
-                where: { state: true },
+                // where: { state: true },
                 include: [{
                     model: User,
                 },
@@ -16,6 +17,33 @@ module.exports = {
                 ]
             })
             
+            if(data.length == 0)
+                return res.status(400).json("Nenhuma informação encontrada")
+            
+            return res.status(200).json(data)
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    },
+    async getUserById(req, res){
+        try {
+            const { userId } = req.params
+            const data = await Model.findAll({
+                // where: { user_id: userId },
+                include: [{
+                    model: User,
+                    where: {
+                        id: { [Op.ne]: userId}
+                    }
+                },
+                {
+                    model: Bike,
+                }
+                ]
+            })
+            
+            console.log(data + '\n\n\n')
+
             if(data.length == 0)
                 return res.status(400).json("Nenhuma informação encontrada")
             

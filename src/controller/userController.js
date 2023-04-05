@@ -8,7 +8,7 @@ module.exports = {
     async getAll(req, res){
         try {
             const data = await Model.findAll({
-                where: { state: true }
+                // where: { state: true }
             })
     
             if(data.length == 0)
