@@ -100,4 +100,29 @@ module.exports = {
             return res.status(500).json(error.message)
         }        
     },
+    async getLogin(req, res) {
+        try {
+            const { email, password } = req.body;
+            const data = await Model.findOne({
+                where: {
+                    email: email,
+                    state: true
+                }
+            });
+
+            if (data === null) {
+                return res.status(401).json("Usuário não encontrado!");
+            }
+
+            if (await bcrypt.compare(req.body.password, data.password)) {
+                return res.json({ auth: true })
+                
+            } else {
+                return res.status(401).json("Senha incorreta!");
+            }
+
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
 }

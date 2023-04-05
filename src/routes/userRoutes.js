@@ -10,5 +10,6 @@ routes
    .post(`${uri}/`, controller.create)
    .put(`${uri}/:id`,controller.update)
    .delete(`${uri}/:id`,controller.delete)
+   .post(`${uri}/login`, controller.getLogin)
 
 module.exports = routes
