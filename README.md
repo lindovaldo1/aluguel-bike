@@ -1,20 +1,26 @@
+Proficiência DAW2 - Lindovaldo (05/04/2023)
 
-comandos usandos durante o desemvolvimento
+O projeto foi desenvolvido com o intuito de ser submetido a avaliação de proficiência da disciplina de Desenvolvimento de Aplicações Web II (DAW II), ministrada pela professora Lídia Bononi.
 
+O sistema tem o objetivo de informatizar um sistema de locação de bicicletas onde o ciclista consegue ver suas bikes que já foram locadas e os administradores conseguem criar locações de bikes e adicionar novos modelos de bicicletas, assim como adicionar novos usuários ao sistema.
 
-npm init
-npm install express
-npm install nodemon -D
-npm install sequelize
-npm install sequelize-cli -D
-npm install mysql2 --save
+Tecnologias usadas no desenvolvimento back-end:	
 
-migrations
-npx sequelize migration:create --name=create-user
-npx sequelize db:migrate
+	nodejs
+	express
+    sequelize
+	body-parse
+	bcrypt
+	cors    
+    mysql	
 
+Tecnologias usadas no desenvolvimento front-end:	
 
-referencia 
-https://www.youtube.com/watch?v=Fbu7z5dXcRs
+	angular
+	angular material
+	momentjs
 
-45:40
+![github](documentation/img/diagrama banco aluguel-bike.svg)
+
+[Alugue Bikes Front](https://github.com/lindovaldo1/aluguel-bike-front/tree/master)
+[Alugue Bikes Back](https://github.com/lindovaldo1/aluguel-bike)
